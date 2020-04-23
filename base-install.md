@@ -1,8 +1,17 @@
 # Arch Linux Installation Guide
-Windows 10/Arch dual boot with separate SSDs in UEFI - rEFInd boot manager
+Windows 10/Arch dual boot on separate SSDs - UEFI - rEFInd boot manager
 
 
 ---
+# USB
+Grab .iso from https://www.archlinux.org/download/
+install via Etcher
+
+Boot into bios
+disable secure boot
+disable fast startup mode
+
+restart spam f12 select usb
 
 # Pre install
 
@@ -213,7 +222,7 @@ $ passwd
 ### Boot Manager
 ###### rEFInd
 ```sh
-$ pacman -S refind-efi efibootmgr networkmanager network-manager-applet wireless_tools wpa_aupplicant dialog os-prober base-devel mtools dosfstools linux-headers
+$ pacman -S refind-efi efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant dialog os-prober base-devel mtools dosfstools linux-headers
 g
 g
 g
