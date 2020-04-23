@@ -75,100 +75,27 @@ We'll install Arch on UEFI mode, so you should enable the UEFI mode and disable 
 ## Pre installation
 I'm presuming that you're already in the Arch Linux zsh shell prompt.
 
-### Set Keyboard Layout
-For brazilian users:
-```sh
-# loadkeys br-abnt2
-```
-> You can see the list of available layouts by running `ls /usr/share/kbd/keymaps/**/*.map.gz`
 
-### Check boot mode
+```sh
+# Check for internet
+$ ping google.com
+or
+$ ip link
+```
+
 To check if the UEFI mode is enabled, run:
 
 ```sh
-# ls /sys/firmware/efi/efivars
+# Check boot mode for UEFI - If directory does not exist boot mode is BIOS
+$ ls /sys/firmware/efi/efivars
 ```
 
-If the directory does not exists, the system may be booted in BIOS.
 
 ### Update System Clock
 Ensures that the system clock is accurate.
 ```sh
-# timedatectl set-ntp true
+$ timedatectl set-ntp true
 ```
-
-### Internet Connection
-First, test if you alredy have internet connection, so run:
-```sh
-# ping -c 2 google.com
-```
-
-If you're not connected, follow one of these steps:
-
-#### DHCP
-This option is automatically started. Run:
-```sh
-# dhcpcd
-```
-
-#### Wi-Fi
-Run the following command and connect to your wi-fi network.
-```
-# wifi-menu -o
-```
-> The `-o` option is to hide your password by using the "obscure" method
-
-#### Wired Connection
-**Warning:** Make sure the DHCP is deactivated by running `systemctl stop dhcpcd.service`
-
-1. Find the network interface name
-
-    ```sh
-    # ip link
-    ```
-
-    The response will be something like:
-    ```
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT
-        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    2: enp2s0f0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN mode DEFAULT qlen 1000
-        link/ether 00:11:25:31:69:20 brd ff:ff:ff:ff:ff:ff
-    3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DORMANT qlen 1000
-        link/ether 01:02:03:04:05:06 brd ff:ff:ff:ff:ff:ff
-    ```
-
-1. Activate Network interface
-
-    Using the `enp2s0f0` for example:
-    ```sh
-    # ip link set enp2s0f0 up
-    ```
-
-1. Add IP addresses
-
-    The command to do that is `ip addr add [ip_address]/[mask] dev [interface]` applying to our example:
-    ```sh
-    # ip addr add 192.168.1.2/24 dev enp2s0f0
-    ```
-
-1. Add the Gateway
-
-    The command is `ip route add default via [gateway]` then:
-    ```sh
-    # ip route add default via 192.168.1.1
-    ```
-
-1. Change DNS
-
-    Using the Google DNS, open the file `/etc/resolv.conf` (you can use `nano` or `vi` to do that) and write down these lines:
-    ```sh
-    nameserver 8.8.8.8
-    nameserver 8.8.4.4
-    search example.com
-    ```
-
-After that, test your internet connection again with the `ping` command.
-
 ### Partitioning
 
 First, define your partitions size. There's no rules about this process.
