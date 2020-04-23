@@ -52,51 +52,25 @@ This guide will show step-by-step how to Install Arch Linux on UEFI mode.
 
 ---
 
-## Bootable Flash Drive
-First of all, you need the Arch Linux image, that can be downloaded from the [Official Website](https://www.archlinux.org/download/).
-After that, you should create the bootable flash drive with the Arch Linux image.
-
-If you're on a GNU/linux distribution, you can use the `dd` command for it. Like:
-```sh
-$ dd bs=4M if=/path/to/archlinux.iso of=/dev/sdx status=progress oflag=sync && sync
-```
-> Note that you need to update the `of=/dev/sdx` with your USB device location (it can be discovered with the `lsblk` command).
-
-Otherwise, if you're on Windows, you can follow this [tutorial](https://wiki.archlinux.org/index.php/USB_flash_installation_media#In_Windows).
-
----
-
-## BIOS
-We'll install Arch on UEFI mode, so you should enable the UEFI mode and disable the secure boot option on your BIOS system.
-(Also remember to change the boot order to boot through your USB device).
-
----
-
 ## Pre installation
-I'm presuming that you're already in the Arch Linux zsh shell prompt.
 
-
+1. ###### Check for internet
 ```sh
-# Check for internet
 $ ping google.com
 or
 $ ip link
 ```
-
-To check if the UEFI mode is enabled, run:
-
+2. ###### Check boot mode
 ```sh
 # Check boot mode for UEFI - If directory does not exist boot mode is BIOS
 $ ls /sys/firmware/efi/efivars
 ```
-
-
-### Update System Clock
-Ensures that the system clock is accurate.
+3. ###### Update system clock
 ```sh
 $ timedatectl set-ntp true
 ```
-### Partitioning
+## Main Install
+###### Partitioning
 
 First, define your partitions size. There's no rules about this process.
 
