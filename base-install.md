@@ -60,9 +60,8 @@ $ ping google.com
 or
 $ ip link
 ```
-###### 2. Check boot mode
+###### 2. Check boot mode for UEFI - if directory does not exist boot mode is BIOS
 ```sh
-# Check boot mode for UEFI - If directory does not exist boot mode is BIOS
 $ ls /sys/firmware/efi/efivars
 ```
 ###### 3. Update system clock
@@ -153,6 +152,21 @@ $ mkfs.ext4 /dev/sdc2
     $ mkdir  /mnt/home
     $ mount /dev/sdc2 /mnt/home
     ```
+   Should look like this after mounting
+`lsblk`
+| Name | Partition        |  Size           | Mount Point |
+| :--: | :-------:        | :-------------: | :--: 	  |
+| `sda`| `hdd storage`    | 931G            | 		  |
+| sda1 |                  | 16M             |      	  |
+| sda2 |                  | 927.9G          |      	  |
+| `sdb`| `Windows Drive`  | 232G            | 		  |
+| sdb1 |                  | 450M            |      	  |
+| sdb2 | `EFI`            | 100M            | /mnt/boot   |
+| sdb3 |                  | 231.5G          |      	  |
+| sdb4 |                  | 86M             |      	  |
+|`sdc` | `arch disk`      | 223.6G          | 		  |
+| sdc1 | `/root`          | 40G             | /mnt	  |
+| sdc2 | `/home`          | 183G            | /mnt/home   |
 
 ---
 
