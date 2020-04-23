@@ -52,24 +52,24 @@ This guide will show step-by-step how to Install Arch Linux on UEFI mode.
 
 ---
 
-## Pre installation
+# Pre install
 
-1. ###### Check for internet
+###### 1. Check for internet
 ```sh
 $ ping google.com
 or
 $ ip link
 ```
-2. ###### Check boot mode
+###### 2. Check boot mode
 ```sh
 # Check boot mode for UEFI - If directory does not exist boot mode is BIOS
 $ ls /sys/firmware/efi/efivars
 ```
-3. ###### Update system clock
+###### 3. Update system clock
 ```sh
 $ timedatectl set-ntp true
 ```
-## Main Install
+# Main Install
 ###### Partitioning
 
 First, define your partitions size. There's no rules about this process.
