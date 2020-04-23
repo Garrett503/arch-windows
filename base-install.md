@@ -72,11 +72,6 @@ $ timedatectl set-ntp true
 ---
 # Start Main Install
 ## Partition Setup
-1. Select Arch drive and format 
-    - `lsblk` to list all partitions
-    - Select Arch drive `fdisk /dev/#drive`
-    - Create GPT disk `g`
-### Partitioning
 Example:
 
 | Name | Partition        |  Size           | Type |
@@ -91,7 +86,11 @@ Example:
 | sdb4 |                  | 86M             |      |
 | sdc  | `arch disk`      | 223.6G          | Disk |
 
-
+1. Select Arch drive and format 
+    - `lsblk` to list all partitions
+    - Select Arch drive `fdisk /dev/sdc`
+    - Create GPT disk `g`
+### Partitioning
 1. Create /root partition
     - `n` to create a new partition
     - Partition Number: default
@@ -107,6 +106,23 @@ Example:
     - Enter
 
 3. Save partition setup`w`
+
+Should look like this afeter creating partitions 
+`lsblk`
+| Name | Partition        |  Size           | Type |
+| :--: | :-------:        | :-------------: | :--: |
+| `sda`| `hdd storage`    | 931G            | Disk |
+| sda1 |                  | 16M             |      |
+| sda2 |                  | 927.9G          |      |
+| `sdb`| `Windows Drive`  | 232G            | Disk |
+| sdb1 |                  | 450M            |      |
+| sdb2 | `EFI`            | 100M            | EFI  |
+| sdb3 |                  | 231.5G          |      |
+| sdb4 |                  | 86M             |      |
+|`sdc` | `arch disk`      | 223.6G          | Disk |
+| sdc1  | `/root`         | 223.6G          | Disk |
+| sdc2  | `/home`         | 223.6G          | Disk |
+
 
 ---
 
