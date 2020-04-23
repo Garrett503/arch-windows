@@ -72,7 +72,7 @@ $ timedatectl set-ntp true
 ---
 # Start Main Install
 ## Partition Setup
-Example:
+Example before creating partitions:
 
 | Name | Partition        |  Size           | Type |
 | :--: | :-------:        | :-------------: | :--: |
@@ -107,7 +107,7 @@ Example:
 
 3. Save partition setup`w`
 
-Should look like this afeter creating partitions 
+Should look like this after creating partitions 
 `lsblk`
 | Name | Partition        |  Size           | Type |
 | :--: | :-------:        | :-------------: | :--: |
@@ -123,33 +123,35 @@ Should look like this afeter creating partitions
 | sdc1  | `/root`         | 223.6G          | Disk |
 | sdc2  | `/home`         | 223.6G          | Disk |
 
-
 ---
 
 ### Format Partitions
 ###### 1. Format /root
 ```sh
-$ mkfs.ext4 /dev/#rootpartition
+$ mkfs.ext4 /dev/sdc1
 ```
 ###### 1. Format /home
 ```sh
-$ mkfs.ext4 /dev/#homepartition
+$ mkfs.ext4 /dev/sdc2
 ```
 
 ### Mount file system
 1. Mount /root partition:
     ```sh
-    $ mount /dev/#root /mnt
+    # sdc1 = /root partition
+    $ mount /dev/sdc1 /mnt
     ```
-2. Mount /boot partition: (to use `grub-install` later)
+2. Mount /boot partition:
     ```sh
-    # mkdir /mnt/boot
-    # mount /dev/#windowsEFIpartition /mnt/boot
+    # sdb2 = windows EFI partition
+    $ mkdir /mnt/boot
+    $ mount /dev/sdb2 /mnt/boot
     ```
 3. Mount /home partition:
     ```sh
+    # sdb2 = /home partition
     $ mkdir  /mnt/home
-    $ mount /dev/#home /mnt/home
+    $ mount /dev/sdc2 /mnt/home
     ```
 
 ---
