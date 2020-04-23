@@ -208,14 +208,21 @@ $ /swapfile none swap details 00
 
 
 
-## Configure System
-### Locale and Language
-Open the file `/etc/locale.gen` and uncomment your locale settings
-
-After that, write your locale string to file `/etc/locale.conf`.
-For example, if you've uncomment the line `en_GK.UTF-8 UTF-8`, now you will write `en_GK.UTF-8`
+### Configure System
+###### Timezone
 ```sh
-echo en_GK.UTF-8 > /etc/locale.conf
+$ ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+```
+```sh
+$ hwclock --systohc
+```
+###### Locales
+1. Enable wifi-menu to automatically connect on boot:
+```sh
+$ nano /etc/locale.gen
+```
+```sh
+$ rem
 ```
 
 Then, generate locale settings by running:
