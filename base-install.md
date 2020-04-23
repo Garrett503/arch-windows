@@ -69,101 +69,71 @@ $ ls /sys/firmware/efi/efivars
 ```sh
 $ timedatectl set-ntp true
 ```
-# Main Install
+---
+# Start Main Install
+## Partition Setup
 1. Select Arch drive and format 
     - `lsblk` to list all partitions
     - Select Arch drive `fdisk /dev/#drive`
     - Create GPT disk `g`
 ### Partitioning
-My HDD has 1Tb of storage. For that example, I'll create 4 partitions, described on the following table:
-(in my case, I'll install arch on `/dev/sda` disk)
+Example:
 
-| Name | Partition | Size            | Type |
-| :--: | :-------: | :-------------: | :--: |
-| sda1 | `/boot`   | 512M            | EFI  |
-| sda2 | `/`       | 64G             | ext4 |
-| sda3 | `swap`    | 16G             | swap |
-| sda4 | `/home`   | Remaining space | ext4 |
+| Name | Partition        |  Size           | Type |
+| :--: | :-------:        | :-------------: | :--: |
+| `sda`| `hdd storage`    | 931G            | Disk |
+| sda1 |                  | 16M             |      |
+| sda2 |                  | 927.9G          |      |
+| `sdb`| `Windows Drive`  | 232G            | Disk |
+| sdb1 |                  | 450M            |      |
+| sdb2 | `EFI`            | 100M            | EFI  |
+| sdb3 |                  | 231.5G          |      |
+| sdb4 |                  | 86M             |      |
+| sdc  | `arch disk`      | 223.6G          | Disk |
 
-fdisk commands
-| Command | Description            |
-| :-----: | ---------------------- |
-| lsblk   | list partitions        |
-| d       | Delete partition       |
-| w       | Write partition        |
-| q       | Quit                   |
-| ?       | Help                   |
 
-1. Enter in the interactive menu
-    ```sh
-    # gdisk /dev/sdx
-    ```
-
-1. Create boot partition
-    - Type `n` to create a new partition
-    - Partition Number: default (return)
-    - First Sector: default
-    - Last Sector: `+512M`
-    - GUID: `EF00`
-
-1. Create root partition
-    - Type `n` to create a new partition
+1. Create /root partition
+    - `n` to create a new partition
     - Partition Number: default
     - First Sector: default
-    - Last Sector: `+64G`
-    - GUID: default
+    - Root size eg. `+40G`
+    - Enter
 
-1. Create swap partition
-    - Type `n` to create a new partition
+2. Create /home partition
+    - `n` to create a new partition
     - Partition Number: default
     - First Sector: default
-    - Last Sector: `+16G`
-    - GUID: `8200`
+    - Home size remainder of disk: Enter
+    - Enter
 
-1. Create home partition
-    - Type `n` to create a new partition
-    - Partition Number: default
-    - First Sector: default
-    - Last Sector: default
-    - GUID: default
+3. Save partition setup`w`
 
-1. Save changes with `w`
+---
 
-1. Quit gdisk with `q`
-
-#### Format partitions
-Once the partitions have been created, each (except swap) should be formatted with an appropriated file system. So run:
-
+### Format Partitions
+###### 1. Format /root
 ```sh
-# mkfs.fat -F32 -n BOOT /dev/sda1  #-- boot partition
-# mkfs.ext4 /dev/sda2              #-- root partition
-# mkfs.ext4 /dev/sda4              #-- home partition
+$ mkfs.ext4 /dev/#rootpartition
+```
+###### 1. Format /home
+```sh
+$ mkfs.ext4 /dev/#homepartition
 ```
 
-The process for swap partition is slight different:
-```sh
-# mkswap -L swap /dev/sda3
-# swapon /dev/sda3
-```
-
-> To check if the swap partition is working, run `swapon -s` or `free -h`.
-
-#### Mount file system
-1. Mount root partition:
+### Mount file system
+1. Mount /root partition:
     ```sh
-    # mount /dev/sda2 /mnt
+    $ mount /dev/#root /mnt
     ```
-
-1. Mount home partition:
+2. Mount /boot partition: (to use `grub-install` later)
     ```sh
-    # mkdir -p /mnt/home
-    # mount /dev/sda4 /mnt/home
+    # mkdir /mnt/boot
+    # mount /dev/#windowsEFIpartition /mnt/boot
     ```
-
-1. Mount boot partition: (to use `grub-install` later)
+3. Mount /home partition:
     ```sh
-    # mkdir -p /mnt/boot/efi
-    # mount /dev/sda1 /mnt/boot/efi
+    $ mkdir  /mnt/home
+    $ mount /dev/#home /mnt/home
     ```
 
 ---
