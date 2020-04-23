@@ -120,8 +120,8 @@ Should look like this after creating partitions
 | sdb3 |                  | 231.5G          |      |
 | sdb4 |                  | 86M             |      |
 |`sdc` | `arch disk`      | 223.6G          | Disk |
-| sdc1  | `/root`         | 223.6G          | Disk |
-| sdc2  | `/home`         | 223.6G          | Disk |
+| sdc1 | `/root`          | 40G             | ext4 |
+| sdc2 | `/home`          | 183G            | ext4 |
 
 ---
 
