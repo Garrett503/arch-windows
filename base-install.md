@@ -106,8 +106,7 @@ Example before creating partitions:
 
 3. Save partition setup`w`
 
-Should look like this after creating partitions 
-`lsblk`
+Should look like this after creating partitions - check with `lsblk`
 | Name | Partition        |  Size           | Type |
 | :--: | :-------:        | :-------------: | :--: |
 | `sda`| `hdd storage`    | 931G            | Disk |
@@ -152,7 +151,7 @@ $ mkfs.ext4 /dev/sdc2
     $ mkdir  /mnt/home
     $ mount /dev/sdc2 /mnt/home
     ```
-Should look like this after mounting check with `lsblk`
+Should look like this after mounting - check with `lsblk`
 | Name | Partition        |  Size           | Mount Point |
 | :--: | :-------:        | :-------------: | :--: 	  |
 | `sda`| `hdd storage`    | 931G            | 		  |
@@ -169,44 +168,45 @@ Should look like this after mounting check with `lsblk`
 
 ---
 
-## Installation
-Now we'll install arch on disk
-
-### Select Mirror
-Before installation, is recommended to select the best mirror servers.
-So open the file `/etc/pacman.d/mirrorlist` (again, you can use `nano` or `vi` to do that) and move the best mirror to the top of the file.
-
-> **Tip**: That [link](https://www.archlinux.org/mirrorlist/) generates a mirror list based on your location, you can use them as reference.
-
-### Install Base Packages
-Now that the mirrors are already set, use `pacstrap` to install the base package group:
+### Installation 
+###### Install base
 ```sh
-# pacstrap /mnt base base-devel
+$ pacstrap /mnt base linux linux-firmware nano
+```
+###### fstab
+```sh
+$ genfstab -U /mnt >> /mnt/etc/fstab
+```
+```sh
+# check fstab
+$ cat /mnt/etc/fstab
+```
+###### Chroot into system
+```sh
+$ arch-chroot /mnt
+```
+###### Create swap
+```sh
+$ fallocate -l #GB /swapfile
+```
+```sh
+$ chmod 600 /swapfile
+```
+```sh
+$ mkswap /swapfile
+```
+```sh
+$ swapon /swapfile
+```
+```sh
+$ nano /etc/fstab
+```
+```sh
+# Add to bottom of fstab file 
+$ /swapfile none swap details 00
 ```
 
-### Generate fstab
-Now you should generate the fstab with the `genfstab` script:
-```sh
-# genfstab -p /mnt >> /mnt/etc/fstab
-```
 
-> Optional: you can add `noatime` to the generated `fstab` file (on root and home partitions) to increase IO performance.
-
-### Chroot
-Now, we'll change root into the new system
-```sh
-# arch-chroot /mnt
-```
-
-> Now, if you want to install some package, do it with `pacman -S <package_name>`
-
-### Check pacman keys
-```sh
-# pacman-key --init
-# pacman-key --populate archlinux
-```
-
----
 
 ## Configure System
 ### Locale and Language
