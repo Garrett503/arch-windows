@@ -217,12 +217,42 @@ $ ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 $ hwclock --systohc
 ```
 ###### Locales
-1. Enable wifi-menu to automatically connect on boot:
 ```sh
 $ nano /etc/locale.gen
 ```
 ```sh
-$ rem
+# uncomment un_US.UTF-8 UTF8
+```
+```sh
+$ locale-gen
+```
+```sh
+$ nano /etc/locale/conf
+```
+```sh
+# add this 
+$ LANG=en_US.UTF-8
+```
+###### Host Name
+```sh
+$ hostnamectl set-hostmane #name
+```
+```sh
+$ nano /etc/hosts
+```
+```
+# IPv4 Hosts
+127.0.0.1	localhost
+::1 		localhost
+127.0.1.1 	#name.localdomain	#name
+
+# Machine FQDN
+127.0.1.1	myhostname.localdomain	myhostname
+
+# IPv6 Hosts
+::1		localhost	ip6-localhost	ip6-loopback
+ff02::1 	ip6-allnodes
+ff02::2 	ip6-allrouters
 ```
 
 Then, generate locale settings by running:
