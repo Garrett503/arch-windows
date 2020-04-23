@@ -203,15 +203,13 @@ $ nano /etc/fstab
 ```
 ```sh
 # Add to bottom of fstab file 
-$ /swapfile none swap details 00
+$ /swapfile none swap defaults 00
 ```
-
-
 
 ### Configure System
 ###### Timezone
 ```sh
-$ ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+$ ln -sf /usr/share/zoneinfo/America/Los_Angeles  /etc/localtime
 ```
 ```sh
 $ hwclock --systohc
@@ -230,7 +228,7 @@ $ locale-gen
 $ nano /etc/locale/conf
 ```
 ```sh
-# add this 
+# add 
 $ LANG=en_US.UTF-8
 ```
 ###### Host Name
@@ -241,6 +239,7 @@ $ hostnamectl set-hostmane #name
 $ nano /etc/hosts
 ```
 ```
+#Add to hosts
 # IPv4 Hosts
 127.0.0.1	localhost
 ::1 		localhost
@@ -254,6 +253,40 @@ $ nano /etc/hosts
 ff02::1 	ip6-allnodes
 ff02::2 	ip6-allrouters
 ```
+###### Set root password
+```sh
+$ passwd
+```
+---
+### Boot Manager
+###### rEFInd
+```sh
+$ pacman -S refind-efi efibootmgr networkmanager network-manager-applet wireless_tools wpa_aupplicant dialog os-prober base-devel mtools dosfstools linux-headers
+g
+g
+g
+g
+g
+g
+g
+```
+### Network Manager
+###### Enable
+```sh
+$ systemctl enable NetworkManager
+```
+### Add user
+###### 
+```sh
+$ useradd -mG wheel #user
+```
+```sh
+$ EDITOR=nano visudo
+```
+```sh
+$ #uncomment %wheel ALL=(ALL) ALL
+```
+
 
 Then, generate locale settings by running:
 ```sh
