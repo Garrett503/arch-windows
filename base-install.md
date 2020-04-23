@@ -70,12 +70,11 @@ $ ls /sys/firmware/efi/efivars
 $ timedatectl set-ntp true
 ```
 # Main Install
-###### Partitioning
-
-First, define your partitions size. There's no rules about this process.
-
-> Tip: If you use a SSD drive, leave 25% of his storage free. More info [here](https://wiki.archlinux.org/index.php/Solid_State_Drives#TRIM).
-
+1. Select Arch drive and format 
+    - `lsblk` to list all partitions
+    - Select Arch drive `fdisk /dev/#drive`
+    - Create GPT disk `g`
+### Partitioning
 My HDD has 1Tb of storage. For that example, I'll create 4 partitions, described on the following table:
 (in my case, I'll install arch on `/dev/sda` disk)
 
@@ -86,22 +85,10 @@ My HDD has 1Tb of storage. For that example, I'll create 4 partitions, described
 | sda3 | `swap`    | 16G             | swap |
 | sda4 | `/home`   | Remaining space | ext4 |
 
-> These values are very related for my PC needs.
-
-#### Create Partitions
-
-To create partitions, I'll use `gdisk` since to work on UEFI mode we need GPT partitions.
-
-First, list partitions (Informational only) with the following command
-```sh
-# gdisk -l /dev/sdx
-```
-
-Here's a table with some handy gdisk commands
-
+fdisk commands
 | Command | Description            |
 | :-----: | ---------------------- |
-| p       | Print partitions table |
+| lsblk   | list partitions        |
 | d       | Delete partition       |
 | w       | Write partition        |
 | q       | Quit                   |
