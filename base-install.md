@@ -137,23 +137,22 @@ $ mkfs.ext4 /dev/sdc2
 ### Mount file system
 1. Mount /root partition:
     ```sh
-    # sdc1 = /root partition
+    # sdc1 is the root partition
     $ mount /dev/sdc1 /mnt
     ```
 2. Mount /boot partition:
     ```sh
-    # sdb2 = windows EFI partition
+    # sdb2 is the windows EFI partition 
     $ mkdir /mnt/boot
     $ mount /dev/sdb2 /mnt/boot
     ```
 3. Mount /home partition:
     ```sh
-    # sdb2 = /home partition
+    # sdb2 is the home partition
     $ mkdir  /mnt/home
     $ mount /dev/sdc2 /mnt/home
     ```
-   Should look like this after mounting
-`lsblk`
+Should look like this after mounting check with `lsblk`
 | Name | Partition        |  Size           | Mount Point |
 | :--: | :-------:        | :-------------: | :--: 	  |
 | `sda`| `hdd storage`    | 931G            | 		  |
