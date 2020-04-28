@@ -1,8 +1,8 @@
-# My packages
+#Packages
 
 ###### pacman
 ```sh
-#firefox //firefox
+$firefox #firefox
 #flashplugin //firefox
 #lm_sensors //monitor - sensors -f, watch sensors
 #pulseaudio //audio
