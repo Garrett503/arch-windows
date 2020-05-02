@@ -12,9 +12,10 @@ $firefox #firefox
 #flameshot //screenshot
 #qbittorrent //utorrent alt
 #filezilla //ftp
-#VLC //video player
+#VLC #vlc-git//video player
 #obs-studio //screen recording
 #gpick //color grabber
+#teamviewer //...
 
 ```
 
