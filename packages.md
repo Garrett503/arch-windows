@@ -14,6 +14,7 @@ $firefox #firefox
 #filezilla //ftp
 #VLC //video player
 #obs-studio //screen recording
+#gpick //color grabber
 
 ```
 
@@ -32,4 +33,22 @@ $firefox #firefox
 #spotify-tui //command spotify
 #gotop  //terminal activity monitor
 #cmatrix or tmatrix //yeah
+#spicetify //spotify themeing
+#sublime //text edit
+#pywal //themer
+#betterdiscord //discord theme
+#polybar //status bar
+#neofetch //ye
+#kitty //terminal 
+#rofi //menu
+#ranger //file manager
+#dolphin //filemanager
+#vim //edit
+#rxvt-unicode //edit
+#nerdfonts //fonts
+#feh //wallpaper
+#xrandr //monitor
+#arandr //gui monitor
+
+
 ```
