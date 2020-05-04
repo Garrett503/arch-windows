@@ -34,6 +34,7 @@ flashplugin         	#Adobe Flash Player NPAPI
 font-manager        	#A simple font management application for GTK+ Desktop Environments
 gimp                	#GNU Image Manipulation Program
 git                 	#the fast distributed version control system
+glasscord             #Injecting composition effects into Electron applications! 
 gnome-system-monitor	#View current processes and monitor system state
 google-chrome       	#The popular and trusted web browser by Google (Stable Channel)
 gpick               	#Advanced color picker written in C++ using GTK+ toolkit
@@ -98,6 +99,7 @@ ttf-ubuntu-font-family	#Ubuntu font family
 unzip               	#For extracting and viewing files in .zip archives
 vim                 	#Vi Improved, a highly configurable, improved version of the vi text editor
 vlc-git             	#A multi-platform MPEG, VCD/DVD, and DivX player (GIT Version)
+wego                  #weather app for the terminal
 wpgtk-git           	#A gui wallpaper chooser that changes your Openbox theme, GTK theme and Tint2 theme
 xdg-user-dirs       	#Manage user directories like ~/Desktop and ~/Music
 xorg-xrandr         	#Primitive command line interface to RandR extension
