@@ -223,13 +223,22 @@ $ passwd
 ###### rEFInd
 ```sh
 $ pacman -S refind-efi efibootmgr networkmanager network-manager-applet wireless_tools wpa_supplicant dialog os-prober base-devel mtools dosfstools linux-headers
-g
-g
-g
-g
-g
-g
-g
+```
+
+###### Grub separate drives
+```
+Get the UUID with: sudo grub-probe -t fs_uuid -d /dev/sda1
+
+and then add an entry for Windows at the end of your grub.cfg:
+
+menuentry "Windows 10" {
+insmod part_gpt
+insmod fat
+insmod search_fs_uuid
+insmod chain
+search --fs-uuid --no-floppy --set=root XXXXXXXXX
+chainloader (${root})/efi/Microsoft/Boot/bootmgfw.efi
+}
 ```
 ### Network Manager
 ###### Enable
